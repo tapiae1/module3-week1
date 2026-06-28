@@ -1,5 +1,8 @@
 ﻿using System.Net.Http.Json;
 
+// for using the converter attribute on the Name pokemon type property. 
+using System.Text.Json.Serialization; 
+
 string pokemonlink = "https://pokeapi.co/api/v2/pokemon"; 
 await RunApp(); 
 
@@ -32,6 +35,12 @@ async Task RunApp()
     }
 
 }
+// Were making an enum, full of pokemon type values, previously, they were just strings. 
+enum PokemonType
+{
+    Normal, Fire, Water, Grass, Electric, Ice, Fighting, Poison, Ground, Flying, Psychic, Bug, Rock, Ghost, Dragon, Dark, Steel, Fairy
+}
+
 
 // Make two classes to use when the JSON is deserialized 
 
@@ -70,5 +79,7 @@ class PokemonTypeSlot
 
 class PokemonTypeInfo
 {
-    public string Name { get; set; } = ""; 
+    // Converter attribute on Name property to let the deserializer convert from string
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public PokemonType Name { get; set; }
 }
