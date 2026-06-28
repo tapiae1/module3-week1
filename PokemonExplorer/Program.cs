@@ -13,8 +13,13 @@ async Task RunApp()
     //var response = await http.GetStringAsync("https://pokeapi.co/api/v2/pokemon");
 
 
-    // Deserialize JSON and store it in "response" 
+    // Deserialize JSON and store it in "response", then print it out
     var response = await http.GetFromJsonAsync<PokemonListResponse?>(pokemonlink); 
+    DateTime now = DateTime.Now; 
+    Console.WriteLine($"Date and Time of data retrieval: {now}"); 
+
+
+
 
     // If the response was empty, nothing in the link 
     if (response == null)
